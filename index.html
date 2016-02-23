@@ -26,14 +26,6 @@
 
 <p>It supports unusually large graphs for interactive visualization. The client's custom WebGL rendering engine renders up to 8MM nodes and edges at a time, and most older client GPUs smoothly support somewhere between 100K and 1MM elements. The serverside OpenCL analytics engine supports even bigger graphs.</p>
 
-<ol>
-<li><a href="#demo-of-friendship-communities-on-facebook">Interactive Demo</a></li>
-<li><a href="#gallery">Graph Gallery</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#tutorial-les-mis%C3%A9rables">Tutorial</a></li>
-<li><a href="#api-reference">API Reference</a></li>
-</ol>
-
 <h3>
 <a id="demo-of-friendship-communities-on-facebook" class="anchor" href="#demo-of-friendship-communities-on-facebook" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo of Friendship Communities on Facebook</h3>
 
@@ -44,8 +36,7 @@
     </td>
   </tr>
 </table>
-
-
+    
 
 <h3>
 <a id="pygraphistry-is" class="anchor" href="#pygraphistry-is" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PyGraphistry is...</h3>
@@ -139,7 +130,7 @@ graphistry.bind(<span class="pl-v">source</span><span class="pl-k">=</span><span
 graphistry.register(<span class="pl-v">key</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Your key<span class="pl-pds">'</span></span>)</pre></div>
 
 <h2>
-<a id="tutorial-les-misérables" class="anchor" href="#tutorial-les-mis%C3%A9rables" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tutorial: Les Misérables</h2>
+<a id="quickstart-graph-les-misérables-in-six-lines" class="anchor" href="#quickstart-graph-les-mis%C3%A9rables-in-six-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quickstart: Graph Les Misérables in Six Lines</h2>
 
 <p>Let's visualize relationships between the characters in <a href="http://en.wikipedia.org/wiki/Les_Mis%C3%A9rables">Les Misérables</a>.
 For this example, we'll choose <a href="http://pandas.pydata.org">Pandas</a> to wrangle data and <a href="http://igraph.org">IGraph</a> to run a community detection algorithm. You can download the <a href="https://raw.githubusercontent.com/graphistry/pygraphistry/master/demos/MiserablesDemo.ipynb">IPython notebook</a> containing this example.</p>
@@ -179,7 +170,7 @@ For this example, we'll choose <a href="http://pandas.pydata.org">Pandas</a> to 
 links <span class="pl-k">=</span> pandas.read_csv(<span class="pl-s"><span class="pl-pds">'</span>./lesmiserables.csv<span class="pl-pds">'</span></span>)</pre></div>
 
 <h3>
-<a id="quick-visualization" class="anchor" href="#quick-visualization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Visualization</h3>
+<a id="minimal-visualization" class="anchor" href="#minimal-visualization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Minimal Visualization</h3>
 
 <p>PyGraphistry can plot graphs directly from Pandas dataframes, IGraph graphs, or NetworkX graphs. Calling <em>plot</em> uploads the data to our visualization servers and return an URL to an embeddable webpage containing the visualization.</p>
 
@@ -194,56 +185,14 @@ plotter.plot(links)</pre></div>
 <p>You should see a beautiful graph like this one:
 <img src="http://i.imgur.com/dRHHTyK.png" alt="Graph of Miserables"></p>
 
-<h3>
-<a id="adding-labels" class="anchor" href="#adding-labels" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding Labels</h3>
-
-<p>Let's add labels to edges in order to show how many times each pair of characters met. We create a new column called <em>label</em> in edge table <em>links</em> that contains the text of the label and we bind <em>edge_label</em> to it.</p>
-
-<div class="highlight highlight-source-python"><pre>links[<span class="pl-s"><span class="pl-pds">"</span>label<span class="pl-pds">"</span></span>] <span class="pl-k">=</span> links.value.map(<span class="pl-k">lambda</span> <span class="pl-smi">v</span>: <span class="pl-s"><span class="pl-pds">"</span>#Meetings: <span class="pl-c1">%d</span><span class="pl-pds">"</span></span> <span class="pl-k">%</span> v)
-plotter <span class="pl-k">=</span> plotter.bind(<span class="pl-v">edge_label</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>label<span class="pl-pds">"</span></span>)
-plotter.plot(links)</pre></div>
-
-<h3>
-<a id="controlling-node-size-and-color" class="anchor" href="#controlling-node-size-and-color" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Controlling Node Size and Color</h3>
-
-<p>Let's size nodes based on their <a href="http://en.wikipedia.org/wiki/PageRank">PageRank</a> score and color them using their <a href="https://en.wikipedia.org/wiki/Community_structure">community</a>. <a href="http://igraph.org/python/">IGraph</a> already has these algorithms implemented for us. If IGraph is not already installed, fetch it with <code>pip install igraph-python</code>. (Warning: <code>pip install igraph</code> will install the wrong package!)</p>
-
-<p>We start by converting our edge dateframe into an IGraph. The plotter can do the conversion for us using the <em>source</em> and <em>destination</em> bindings. Then we create two new node attributes (<em>pagerank</em> &amp; <em>community</em>).</p>
-
-<div class="highlight highlight-source-python"><pre>ig <span class="pl-k">=</span> plotter.pandas2igraph(links)
-ig.vs[<span class="pl-s"><span class="pl-pds">'</span>pagerank<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> ig.pagerank()
-ig.vs[<span class="pl-s"><span class="pl-pds">'</span>community<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> ig.community_infomap().membership
-
-plotter.bind(<span class="pl-v">point_color</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>community<span class="pl-pds">'</span></span>, <span class="pl-v">point_size</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>pagerank<span class="pl-pds">'</span></span>).plot(ig)</pre></div>
-
-<p><img src="http://i.imgur.com/P7fm5sn.png" alt="Second Graph of Miserables"></p>
-
 <h2>
-<a id="going-further-marvel-comics" class="anchor" href="#going-further-marvel-comics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Going Further: Marvel Comics</h2>
-
-<p>This is a more complex example: we link together Marvel characters who co-star in the same comic. The dataset is split in three files:</p>
+<a id="next-steps" class="anchor" href="#next-steps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next Steps</h2>
 
 <ul>
-<li><a href="https://raw.githubusercontent.com/graphistry/pygraphistry/master/demos/data/appearances.txt">appearances.txt</a></li>
-<li><a href="https://raw.githubusercontent.com/graphistry/pygraphistry/master/demos/data/characters.txt">characters.txt</a></li>
-<li><a href="https://raw.githubusercontent.com/graphistry/pygraphistry/master/demos/data/comics.txt">comics.txt</a></li>
+<li>Email <a href="mailto:pygraphistry@graphistry.com">pygraphistry@graphistry.com</a> for an API key!</li>
+<li>Read our tutorials to learn how to visualize complex datasets.</li>
+<li>Check out our demo folder.</li>
 </ul>
-
-<p>Find out who is the most popular Marvel hero! Run the code in <a href="https://raw.githubusercontent.com/graphistry/pygraphistry/master/demos/MarvelTutorial.ipynb">the Marvel Demo notebook</a> to browse the entire Marvel universe.</p>
-
-<p><img src="http://i.imgur.com/0rgPLg7.png" alt="Marvel Universe"></p>
-
-<h2>
-<a id="api-reference" class="anchor" href="#api-reference" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Reference</h2>
-
-<p>Full Python (including IPython/Juypter) <a href="http://pygraphistry.readthedocs.org/en/latest/">API documentation</a>.</p>
-
-<p>See also: <a href="http://graphistry.com/api/api0.9.2.html#python">REST API and deprecrated Python docs</a>.</p>
-
-<h2>
-<a id="next-step" class="anchor" href="#next-step" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next Step</h2>
-
-<p>Email <a href="mailto:pygraphistry@graphistry.com">pygraphistry@graphistry.com</a> for an API key!</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/graphistry/pygraphistry">Pygraphistry</a> is maintained by <a href="https://github.com/graphistry">graphistry</a>.</span>
@@ -253,6 +202,16 @@ plotter.bind(<span class="pl-v">point_color</span><span class="pl-k">=</span><sp
 
     </section>
 
-  
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-59712214-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
