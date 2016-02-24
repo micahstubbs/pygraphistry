@@ -13,9 +13,9 @@
     <section class="page-header">
       <h1 class="project-name">Pygraphistry</h1>
       <h2 class="project-tagline">PyGraphistry is library to extract, transform, and visually explore big graphs</h2>
+      <a href="#installation" class="btn">Install with pip</a>
       <a href="https://github.com/graphistry/pygraphistry" class="btn">View on GitHub</a>
       <a href="https://github.com/graphistry/pygraphistry/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/graphistry/pygraphistry/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
@@ -29,14 +29,25 @@
 <h3>
 <a id="demo-of-friendship-communities-on-facebook" class="anchor" href="#demo-of-friendship-communities-on-facebook" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo of Friendship Communities on Facebook</h3>
 
-<table>
+<table style="width:100%;">
   <tr valign="top">
-    <td align="center">Click to open interactive version! <em>(For server-backed interactive analytics, use an API key)</em><a href="http://proxy-labs.graphistry.com/graph/graph.html?dataset=PyGraphistry/NY0D72L2UW&amp;usertag=github&amp;info=true&amp;static=true&amp;contentKey=Facebook_Github_Demo&amp;play=0&amp;center=false&amp;menu=false&amp;goLive=false&amp;left=-2.02e+4&amp;right=1.51e+4&amp;top=-1.07e+4&amp;bottom=9.15e+3&amp;legend=%7B%22nodes%22:%20%22People%20(Names%20are%20fake).%3Cbr/%3E%20Color%20indicates%20community%20and%20size%20shows%20popularity.%22,%20%22edges%22:%20%22Friendships%22,%20%22subtitle%22:%20%22%3Cp%3ECreate%20your%20own%20visualizations%20with%20%3Ca%20href=%5C%22https://github.com/graphistry/pygraphistry/%5C%22%3EPyGraphistry%3C/a%3E.%3C/p%3E%22,%20%22title%22:%20%22%3Ch3%3EFacebook%20Friendships%20(Read-only%20Mode)%3C/h3%3E%22%7D"><img src="http://i.imgur.com/Ows4rK4.png" title="Click to open."></a>
+    <td align="center">Click to open interactive version! <em></em><a href="http://proxy-labs.graphistry.com/graph/graph.html?dataset=PyGraphistry/NY0D72L2UW&usertag=github&info=true&static=true&contentKey=Facebook_Github_Demo&play=0&center=false&menu=false&goLive=false&left=-2.02e+4&right=1.51e+4&top=-1.07e+4&bottom=9.15e+3&legend={%22nodes%22:%20%22People%20(Names%20are%20fake).%3Cbr/%3E%20Color%20indicates%20community%20and%20size%20shows%20popularity.%22,%20%22edges%22:%20%22Friendships%22,%20%22subtitle%22:%20%22%3Cp%3ECreate%20your%20own%20visualizations%20with%20%3Ca%20href=\%22https://github.com/graphistry/pygraphistry/\%22%3EPyGraphistry%3C/a%3E.%3C/p%3E%22,%20%22title%22:%20%22%3Ch3%3EFacebook%20Friendships%20(Read-only%20Mode)%3C/h3%3E%22}"><img src="http://i.imgur.com/Ows4rK4.png" title="Click to open."></a>
     <em>Source data: <a href="http://snap.stanford.edu">SNAP</a></em>
-    </td>
+	</td>
   </tr>
 </table>
-    
+
+<!--- IFRAME
+<table style="width:100%;">
+  <tr valign="top">
+    <td align="center"><b>Friendship Communities on Facebook.</b><br><iframe width="100%" height="500" src="http://proxy-labs.graphistry.com/graph/graph.html?dataset=PyGraphistry/NY0D72L2UW&usertag=github&info=true&static=true&contentKey=Facebook_Github_Demo&play=0&center=false&menu=false&goLive=false&left=-2.02e+4&right=1.51e+4&top=-1.07e+4&bottom=9.15e+3&legend={%22nodes%22:%20%22People%20(Names%20are%20fake).%3Cbr/%3E%20Color%20indicates%20community%20and%20size%20shows%20popularity.%22,%20%22edges%22:%20%22Friendships%22,%20%22subtitle%22:%20%22%3Cp%3ECreate%20your%20own%20visualizations%20with%20%3Ca%20href=\%22https://github.com/graphistry/pygraphistry/\%22%3EPyGraphistry%3C/a%3E.%3C/p%3E%22,%20%22title%22:%20%22%3Ch3%3EFacebook%20Friendships%20(Read-only%20Mode)%3C/h3%3E%22}"></iframe><br></a>
+    For interactive analytics, use an API key. &nbsp; <em>Source data: <a href="http://snap.stanford.edu">SNAP</a></em>
+	</td>
+  </tr>
+</table>
+
+-->
+
 
 <h3>
 <a id="pygraphistry-is" class="anchor" href="#pygraphistry-is" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PyGraphistry is...</h3>
@@ -130,7 +141,7 @@ graphistry.bind(<span class="pl-v">source</span><span class="pl-k">=</span><span
 graphistry.register(<span class="pl-v">key</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Your key<span class="pl-pds">'</span></span>)</pre></div>
 
 <h2>
-<a id="quickstart-graph-les-misérables-in-six-lines" class="anchor" href="#quickstart-graph-les-mis%C3%A9rables-in-six-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quickstart: Graph Les Misérables in Six Lines</h2>
+<a id="quickstart-graph-les-misérables-in-six-lines" class="anchor" href="#quickstart-graph-les-mis%C3%A9rables-in-six-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quickstart: Graph Les Misérables in 6 Lines</h2>
 
 <p>Let's visualize relationships between the characters in <a href="http://en.wikipedia.org/wiki/Les_Mis%C3%A9rables">Les Misérables</a>.
 For this example, we'll choose <a href="http://pandas.pydata.org">Pandas</a> to wrangle data and <a href="http://igraph.org">IGraph</a> to run a community detection algorithm. You can download the <a href="https://raw.githubusercontent.com/graphistry/pygraphistry/master/demos/MiserablesDemo.ipynb">IPython notebook</a> containing this example.</p>
@@ -191,13 +202,19 @@ plotter.plot(links)</pre></div>
 <ul>
 <li>Email <a href="mailto:pygraphistry@graphistry.com">pygraphistry@graphistry.com</a> for an API key!</li>
 <li>Read our tutorials to learn how to visualize complex datasets.</li>
-<li>Check out our demo folder.</li>
+    <ol>
+        <li><a href="html/Tutorial%20Part%201%20(Honey%20Pot).html">
+            Creating a node table + controlling sizes and colors (HoneyPot)
+        </a></li>
+        <li><a href="html/Tutorial%20Part%202%20(Apache%20Logs).html">
+            Aggregating edges and creating multiple views (Apache Logs)
+            </a></li>
+    </ol>
+    <li>Check out our <a href="https://github.com/graphistry/pygraphistry/tree/master/demos">demos folder</a>.</li>
 </ul>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/graphistry/pygraphistry">Pygraphistry</a> is maintained by <a href="https://github.com/graphistry">graphistry</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/graphistry/pygraphistry">Pygraphistry</a> is maintained by <a href="https://www.graphistry.com">Graphistry</a>.</span>
       </footer>
 
     </section>
